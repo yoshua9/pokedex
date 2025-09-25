@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "88c1651e-97e3-4f3f-a626-a49008887441",
+		"name": "Pokedex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5413353"
+	},
+	"item": [
+		{
+			"name": "List pokemons",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemon",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create pokemon",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Charizard\",\n    \"type\": \"Fire\",\n    \"hp\": 80,\n    \"status\": \"wild\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemon",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pokemon details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pokemon/10",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pokemon",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
