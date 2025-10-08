@@ -5,6 +5,8 @@ namespace App\Application\UseCases\Pokemon\Services;
 use App\Application\UseCases\Pokemon\DTOs\CreatePokemonDTO;
 use App\Domain\Pokemon\Repositories\PokemonRepositoryInterface;
 use App\Domain\Pokemon\Entities\Pokemon;
+use App\Domain\Pokemon\Enums\PokemonType;
+use App\Domain\Pokemon\Enums\PokemonStatus;
 use Exception;
 
 class CreatePokemonService
@@ -23,11 +25,11 @@ class CreatePokemonService
     {
         $pokemon = new Pokemon(
             name: $pokemonDTO->name,
-            type: $pokemonDTO->type,
+            type: PokemonType::from($pokemonDTO->type),
             hp: $pokemonDTO->hp,
-            status: $pokemonDTO->status
+            status: PokemonStatus::from($pokemonDTO->status)
         );
 
-       return $this->pokemonRepository->create($pokemon);
+        return $this->pokemonRepository->create($pokemon);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Domain\Pokemon\Repositories;
+namespace App\Domain\Pokemon\Repositories;
 
-use app\Domain\Pokemon\Entities\Pokemon;
+use App\Domain\Pokemon\Entities\Pokemon;
 
 interface PokemonRepositoryInterface
 {

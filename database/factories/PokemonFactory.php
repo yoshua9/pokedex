@@ -2,20 +2,22 @@
 
 namespace Database\Factories;
 
+use App\Infrastructure\Persistence\Eloquent\Models\Pokemon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Infrastructure\Persistence\Eloquent\Models\Pokemon as EloquentPokemon;
 
 class PokemonFactory extends Factory
 {
-    protected $model = EloquentPokemon::class;
+    protected $model = Pokemon::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->word(),
-            'type' => $this->faker->randomElement(['Electric','Fire','Water','Grass','Psychic']),
-            'hp' => $this->faker->numberBetween(1, 100),
-            'status' => $this->faker->randomElement(['wild','captured']),
+            'name' => $this->faker->word(),
+            'type' => $this->faker->randomElement([
+                'Fire', 'Water', 'Grass', 'Electric', 'Psychic'
+            ]),
+            'hp' => $this->faker->numberBetween(10, 100),
+            'status' => $this->faker->randomElement(['wild', 'captured']),
         ];
     }
 }

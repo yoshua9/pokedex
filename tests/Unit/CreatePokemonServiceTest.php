@@ -7,6 +7,8 @@ use App\Application\UseCases\Pokemon\Services\CreatePokemonService;
 use App\Application\UseCases\Pokemon\DTOs\CreatePokemonDTO;
 use App\Domain\Pokemon\Entities\Pokemon;
 use App\Domain\Pokemon\Repositories\PokemonRepositoryInterface;
+use App\Domain\Pokemon\Enums\PokemonType;
+use App\Domain\Pokemon\Enums\PokemonStatus;
 
 class CreatePokemonServiceTest extends TestCase
 {
@@ -21,9 +23,9 @@ class CreatePokemonServiceTest extends TestCase
 
         $expectedPokemon = new Pokemon(
             name: 'Pikachu',
-            type: 'Electric',
+            type: PokemonType::from('Electric'),
             hp: 35,
-            status: 'captured'
+            status: PokemonStatus::from('captured')
         );
         $expectedPokemon->setId(1);
 
@@ -34,9 +36,11 @@ class CreatePokemonServiceTest extends TestCase
             ->with($this->callback(function ($pokemon) {
                 return $pokemon instanceof Pokemon
                     && $pokemon->getName() === 'Pikachu'
-                    && $pokemon->getType() === 'Electric'
+                    && $pokemon->getType() instanceof PokemonType
+                    && $pokemon->getType()->value === 'Electric'
                     && $pokemon->getHp() === 35
-                    && $pokemon->getStatus() === 'captured';
+                    && $pokemon->getStatus() instanceof PokemonStatus
+                    && $pokemon->getStatus()->value === 'captured';
             }))
             ->willReturn($expectedPokemon);
 
@@ -47,8 +51,8 @@ class CreatePokemonServiceTest extends TestCase
         $this->assertInstanceOf(Pokemon::class, $result);
         $this->assertEquals(1, $result->getId());
         $this->assertEquals('Pikachu', $result->getName());
-        $this->assertEquals('Electric', $result->getType());
+        $this->assertEquals(PokemonType::from('Electric'), $result->getType());
         $this->assertEquals(35, $result->getHp());
-        $this->assertEquals('captured', $result->getStatus());
+        $this->assertEquals(PokemonStatus::from('captured'), $result->getStatus());
     }
 }

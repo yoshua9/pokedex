@@ -4,7 +4,7 @@ namespace App\Infrastructure\Http\Controllers\Pokemon;
 
 use App\Application\UseCases\Pokemon\services\GetPokemonDetailsService;
 use Illuminate\Http\JsonResponse;
-use InvalidArgumentException;
+use App\Domain\Pokemon\Exceptions\PokemonNotFoundException;
 use Exception;
 class GetPokemonDetailsController
 {
@@ -22,7 +22,7 @@ class GetPokemonDetailsController
             return response()->json([
                 'data' => $pokemonDetails
             ]);
-        } catch (InvalidArgumentException $e) {
+        } catch (PokemonNotFoundException $e) {
             return response()->json(['error' => $e->getMessage()], 404);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to retrieve pokemon details'], 500);

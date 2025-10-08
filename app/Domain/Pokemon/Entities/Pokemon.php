@@ -1,19 +1,23 @@
 <?php
 
-namespace app\Domain\Pokemon\Entities;
+namespace App\Domain\Pokemon\Entities;
+
+use App\Domain\Pokemon\Enums\PokemonType;
+use App\Domain\Pokemon\Enums\PokemonStatus;
+
 class Pokemon
 {
     private ?int $id = null;
 
     public function __construct(
         private string $name,
-        private string $type,
+        private PokemonType $type,
         private int $hp,
-        private string $status
+        private PokemonStatus $status
     ) {}
 
     // Getters
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -23,7 +27,7 @@ class Pokemon
         return $this->name;
     }
 
-    public function getType(): string
+    public function getType(): PokemonType
     {
         return $this->type;
     }
@@ -33,7 +37,7 @@ class Pokemon
         return $this->hp;
     }
 
-    public function getStatus(): string
+    public function getStatus(): PokemonStatus
     {
         return $this->status;
     }
@@ -49,7 +53,7 @@ class Pokemon
         $this->name = $name;
     }
 
-    public function setType(string $type): void
+    public function setType(PokemonType $type): void
     {
         $this->type = $type;
     }
@@ -59,7 +63,7 @@ class Pokemon
         $this->hp = $hp;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(PokemonStatus $status): void
     {
         $this->status = $status;
     }

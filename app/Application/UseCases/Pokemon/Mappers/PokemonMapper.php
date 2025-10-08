@@ -2,7 +2,9 @@
 
 namespace App\Application\UseCases\Pokemon\Mappers;
 
-use app\Domain\Pokemon\Entities\Pokemon;
+use App\Domain\Pokemon\Entities\Pokemon;
+use App\Domain\Pokemon\Enums\PokemonType;
+use App\Domain\Pokemon\Enums\PokemonStatus;
 use App\Infrastructure\Persistence\Eloquent\Models\Pokemon as EloquentPokemon;
 
 class PokemonMapper
@@ -11,9 +13,9 @@ class PokemonMapper
     {
         $pokemon = new Pokemon(
             name: $eloquentPokemon->name,
-            type: $eloquentPokemon->type,
+            type: PokemonType::from($eloquentPokemon->type),
             hp: $eloquentPokemon->hp,
-            status: $eloquentPokemon->status
+            status: PokemonStatus::from($eloquentPokemon->status)
         );
 
         if ($eloquentPokemon->id) {
@@ -27,9 +29,9 @@ class PokemonMapper
     {
         return new EloquentPokemon([
             'name'   => $pokemon->getName(),
-            'type'   => $pokemon->getType(),
+            'type'   => $pokemon->getType()->value,
             'hp'     => $pokemon->getHp(),
-            'status' => $pokemon->getStatus(),
+            'status' => $pokemon->getStatus()->value,
         ]);
     }
 }
